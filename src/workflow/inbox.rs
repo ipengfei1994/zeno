@@ -27,12 +27,27 @@ impl Inbox {
             content,
             created_at: Utc::now(),
             updated_at: Utc::now(),
+            links: Vec::new(),
         };
         self.storage.save_zettel(&zettel)?;
         Ok(zettel)
     }
 
     pub fn load_zettel(&self, id: &str) -> Result<Zettel, ZenoError> {
+        self.storage.load_zettel(id)
+    }
+
+    pub fn save_zettel(&self, zettel: &Zettel) -> Result<(), ZenoError> {
+        self.storage.save_zettel(zettel)
+    }
+}
+
+impl ZettelStorage for Inbox {
+    fn save_zettel(&self, zettel: &Zettel) -> Result<(), ZenoError> {
+        self.storage.save_zettel(zettel)
+    }
+
+    fn load_zettel(&self, id: &str) -> Result<Zettel, ZenoError> {
         self.storage.load_zettel(id)
     }
 }

@@ -27,3 +27,13 @@ impl Archive {
         self.storage.load_zettel(id)
     }
 }
+
+impl ZettelStorage for Archive {
+    fn save_zettel(&self, zettel: &Zettel) -> Result<(), ZenoError> {
+        self.storage.save_zettel(zettel)
+    }
+
+    fn load_zettel(&self, id: &str) -> Result<Zettel, ZenoError> {
+        self.storage.load_zettel(id)
+    }
+}
